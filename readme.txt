@@ -4,7 +4,7 @@
  
  Next, get a copy of this API using Bazaar:
  
-	$ bzr branch lp:~shybovycha/+junk/cm_phplib
+	$ git clone git://github.com/shybovycha/cm_phplib.git
 	
  Then, install PHP5 and some extensions. Instructions are written below. If you have it done, just skip next lines.
  
