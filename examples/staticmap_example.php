@@ -36,4 +36,5 @@
 	fclose($f);
 
 	echo "<strong>StaticMapService test #3: </strong><br /><img src='bar3.png' /><br />";
+	echo "\r\n";
 ?>

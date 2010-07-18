@@ -22,4 +22,5 @@
 	fclose($f);
 
 	echo "<strong>Tile from VectorStream (fromCoords) test: </strong><br /><a href='zaooza.svg'>[FILE]</a><br /><br />";
+	echo "\r\n";
 ?>

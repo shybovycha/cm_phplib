@@ -1,5 +1,5 @@
 <?php
-	require "Cloudmade.php";
+	require "../lib/Cloudmade.php";
 
 	$client = new Client("BC9A493B41014CAABB98F0471D759707");
 
@@ -17,4 +17,5 @@
 	# With "query" argument
 	$a = $client->find(array("query" => "Hermannplatz, Berlin", "return_location" => "true"));
 	echo "<strong>Geocoding 'find' test (with query): </strong>" . $a->results[0]->toString() . "<br /><br />";
+	echo "\r\n";
 ?>
