@@ -1,196 +1,272 @@
 <?php
 
-/**
- * Routing service
- * 
- * @package Routing
- * @author Artem Shybovych
- * @copyright Cloudmade, 2009
- */
+	/**
+	 *  @copyright Cloudmade, 2010
+	 *  @license license.txt
+	 */
 
-require_once 'Geometry.php';
-
-if (!isset($_TEST_))
-	require_once 'Connection.php';
-
-/**
- * Cloudmade's Routing service class
- */
-
-class Routing {
-    var $ROUTE_TYPES = array('car', 'foot', 'bicycle');
-    var $OUTPUT_FORMATS = array('js', 'json', 'gpx');
-    var $STATUS_OK = 0;
-    var $STATUS_ERROR = 1;
-    var $EARTHS_DIRECTIONS = array("N", "NE", "E", "SE", "S", "SW", "W", "NW");
-    var $TURN_TYPE = array("C", "TL", "TSLL", "TSHL", "TR", "TSLR", "TSHR", "U");
-
-	var $connection, $sub_domain;
+	require_once "Cloudmade.php";
 
 	/**
-	 * Constructor. Creates Routing object based on connection param given.
-	 * 
-	 * @param Connection $_connection Cloudmade's service Connection object
+	 *  Class corresponding for CloudMade's routing service
+	 *
+	 *  @see RoutingService
+	 *  @package Cloudmade
 	 */
-	
-    function Routing($_connection) {
-		$this->sub_domain = 'routes';
-		$this->connection = $_connection;
-	}
-	
-	/**
-	 * Function, that builds way from $start_point to $end_point through $_transit_points and returns Route object.
-	 * 
-	 * @param Point $start_point Point where to start building way from
-	 * @param Point $end_point Point where the way finishes
-	 * @param Point[] $_transit_points Array of points, the way must gi through
-	 * @param string $route_type Type of the route. Could be either 'car', 'foot' or 'bicycle';
-	 * @param string $lang Language code according to the `ISO 3166-1 alpha-2` standard
-	 * @param string $route_type_modifier Measure units for the distance calculation
-	 */
-	
-	function route($start_point, $end_point, $_transit_points = null, $route_type = 'car', $lang = 'en', $_route_type_modifier = null) {
-		if (isset($transit_points))
-			for ($i = 0; $i < count($_transit_points); $i++)
-				$transit_points = $transit_points . ',[' . $_transit_points[$i]->to_string() . ']';
-      
-		if (isset($_route_type_modifier))
-			$route_type_modifier = '/' . $_route_type_modifier;
-		
-		$uri = '/api/0.3/' . $start_point->to_string() . $transit_points . ',' . $end_point->to_string();
-		$uri = $uri . '/' . $route_type . $route_type_modifier . '.js?lang=' . $lang . '&units=km';
-      
-		return $this->_call_service($uri);
-    }
-    
-    /**
-     * Make the call to CloudMade's service using underlying connection. This is an internal method and shouldn't be used directly. 
-     * 
-	 * @return Requested route
-     * 
-     * @param string $uri Request string
-     */ 
-    function _call_service($uri) {
-		$raw = $this->connection->call_service($uri, $this->sub_domain);
-        
-        return new Route(json_decode($raw, true));
-	}
-}
 
-/**
- * Statistics of the route
- */
+	class RoutingService extends Service
+	{
+		/*var $ROUTE_TYPES = array('car', 'foot', 'bicycle');
+		var $OUTPUT_FORMATS = array('js', 'json', 'gpx');
+		var $STATUS_OK = 0, $STATUS_ERROR = 1, $EARTHS_DIRECTIONS = array("N", "NE", "E", "SE", "S", "SW", "W", "NW");
+		var $TURN_TYPE = array("C", "TL", "TSLL", "TSHL", "TR", "TSLR", "TSHR", "U");*/
 
-class RouteSummary {
-	var $total_distance, $total_time, $start_point, $end_point, $transit_points;
+		/**
+		 *  Constructor. For internal use only.
+		 */
 
-	/**
-	 * Constructor
-	 * 
-	 * @param string $summary JSON representation of summary instructions
-	 */
-	
-    function RouteSummary($summary) {
-		$this->total_distance = floatval($summary['total_distance']);
-        $this->total_time = floatval($summary['total_time']);
-        $this->start_point = $summary['start_point'];
-        $this->end_point = $summary['end_point'];
-        $this->transit_points = $summary['transit_points'];
-    }
-}
+		function RoutingService($_client, $_subdomain = null)
+		{
+			$subdomain = ($_subdomain == null) ? "routes" : $_subdomain;
 
-
-/**
- * Wrapper around raw data being returned by routing service
- * 
- * @param array $instructions List of instructions
- * @param RouteSummary $summary Statistical info about the route
- * @param Line $geometry Geometry of route
- * @param string $version Version of routing HTTP API
- */
-
-class Route {
-	var $instructions, $summary, $geometry, $version, $status, $status_message;
-
-    var $STATUS_OK = 0, $STATUS_ERROR = 1;
-    
-    /**
-     * Constructor
-     * 
-     * @param array $data - JSON representation of the data
-     */
-
-    function Route($data) {
-        $this->status = intval($data['status']);
-        
-        for ($i = 0; $i < count($data['route_instructions']); $i++)
-			$this->instructions[] = new RouteInstruction($data['route_instructions'][$i]);
-        
-        $this->summary = new RouteSummary($data['route_summary']);
-        $this->geometry = new Line($data['route_geometry']);
-        $this->version = $data['version'];
-        $this->status_message = $data['status_message'];
-    }
-	
-	function instruction() {
-		return $this->instructions;
-	}
-}
-
-/**
- * Instructions on route passing
- * 
- * @param string $instruction
- * @param float $length
- * @param int $position
- * @param int $time
- * @param string $length_caption
- * @param string $earth_direction
- * @param float $azimuth
- * @param string $turn_type
- * @param float $turn_angle
- */
-
-class RouteInstruction {
-	var $instruction, $length, $position, $time, $length_caption, $earth_direction;
-    var $azimuth, $turn_type, $turn_angle;
-
-	/**
-	 * Constructor
-	 */
-    function RouteInstruction($data) {
-		$this->instruction = $data[0];
-		$this->length = floatval($data[1]);
-		$this->position = intval($data[2]);
-		$this->time = intval($data[3]);
-		$this->length_caption = $data[4];
-		$this->earth_direction = $data[5];
-		$this->azimuth = floatval($data[6]);
-		
-		if (count($data) == 9) {
-			$this->turn_type = $data[7];
-			$this->turn_angle = $data[8];
+			parent::Service($_client, $subdomain);
 		}
-	}
-}
 
-/**
- * Simplified access to Routing service.
- * 
- * @param Connection $_connection Connection object.
- * @param Point $start_point Point, which is a start of the way.
- * @param Point $end_point Point, which represents the end of the way.
- * @param Array(Point) $_transit_points Points, which way should pass through.
- * @param String $route_type Type of the way. Could be 'car', 'foot' or 'bicycle'
- * @param String $lang Language of instructions, which will be generated.
- * @param String $_route_type_modifier Route type modifier if needed.
- * 
- * @return Array of RouteInstruction objects.
- */
+		/**
+		 *  Build route.
+		 *
+		 *  @param Point start_point Starting point
+		 *  @param Point end_point Ending point
+		 *  @param string route_type Type of route, e.g. 'car', 'foot', etc.
+		 *  @param array transit_points List of {@link Point} objects route must visit before reaching end.
+		 *   Points are visited in the same order they are specified in the sequence.
+		 *  @param string route_type_modifier Modifier of the route type
+		 *  @param string lang Language code in conformance to `ISO 3166-1 alpha-2` standard
+		 *  @param string units Measure units for distance calculation
+		 *
+		 *  @return Route Returns {@link Route} object that was found.
+		 *
+		 *  @todo Make possible passing all these args as a hash.
+		 */
 
-function cm_route($connection, $start_point, $end_point, $_transit_points = null, $route_type = 'car', $lang = 'en', $_route_type_modifier = null) {
-	$routing = new Routing($connection);
-	
-	return $routing->route($start_point, $end_point, $_transit_points, $route_type, $lang, $_route_type_modifier)->instruction();
-}
+		function route($_start_point, $_end_point, $_transit_points = null, $_route_type = "car", $_units = "km", $_lang = "en", $_route_type_modifier = null)
+		{
+			if ($_transit_points != null)
+			{
+				$s = ",[";
+
+				foreach ($_transit_points as $i)
+					$s .= $i->toLatLon() . ",";
+
+				$s = trim($s, ", ");
+				$s .= "]";
+
+				$_transit_points = $s;
+			}
+
+			if ($_start_point == null || $_end_point == null)
+				return null;
+
+			if ($_route_type_modifier != null)
+			{
+				$_route_type_modifier = "/" . $_route_type_modifier;
+			}
+
+			$url = "/" . $_start_point->toLatLon() . $_transit_points . ",";
+			$url .= $_end_point->toLatLon() . "/" . $_route_type . $_route_type_modifier;
+			$url .= ".js?lang=" . $_lang . "&units=" . $_units;
+
+			return new Route(json_decode(parent::connect($url), true));
+		}
+
+		/**
+		 *  Internal utility method.
+		 *
+		 *  @return string This service's base URL.
+		 */
+
+		function urlTemplate()
+		{
+			return parent::urlTemplate() . "/api/0.3";
+		}
+	};
+
+	/**
+	 *  @see RouteSummary
+	 *  @package Cloudmade
+	 *
+	 *  Statistics of the route.
+	 *
+	 *  @param float $total_distance Summary path' length.
+	 *  @param float $total_time Summary path' time.
+	 *  @param {@link Point} $start_point Path's start point.
+	 *  @param {@link Point} $end_point Path's end point.
+	 *  @param array $transit_points {@link Point} objects array, path goes through.
+	 *
+	 *  @todo toString() method
+	 */
+
+	class RouteSummary
+	{
+		var $total_distance, $total_time, $start_point, $end_point, $transit_points;
+
+		/**
+		 *  Constructor. For internal API use only.
+		 */
+
+		function RouteSummary($_summary)
+		{
+			if (!is_array($_summary) || is_null($_summary))
+				return null;
+
+			if (array_key_exists("total_distance", $_summary))
+				$this->total_distance = floatval($_summary["total_distance"]);
+
+			if (array_key_exists("total_time", $_summary))
+				$this->total_time = floatval($_summary["total_time"]);
+
+			if (array_key_exists("start_point", $_summary))
+				$this->start_point = $_summary["start_point"];
+
+			if (array_key_exists("end_point", $_summary))
+				$this->end_point = $_summary["end_point"];
+
+			if (array_key_exists("transit_points", $_summary))
+				$this->transit_points = $_summary["transit_points"];
+		}
+	};
+
+	/**
+	 *  @see Route
+	 *  @package Cloudmade
+	 *
+	 *  Wrapper around raw data being returned by routing service.
+	 *
+	 *  @param RouteInstruction $instructions Route instructions list.
+	 *  @param RouteSummary $summary Route's statistic info.
+	 *	@param Geometry $geometry Route's geometry.
+	 *	@param string $version Routing HTTP API version.
+	 *	@param int $status Response status.
+	 *  @param int $status_message Response status.
+	 */
+
+	class Route
+	{
+		var $instructions, $summary, $geometry, $version, $status, $status_message;
+
+		//var $STATUS_OK = 0, $STATUS_ERROR = 1;
+
+		/**
+		 *  Constructor. For internal use only.
+		 */
+		function Route($_data)
+		{
+			try
+			{
+				if (array_key_exists("status", $_data))
+					$this->status = intval($_data["status"]);
+
+				if (array_key_exists("route_instructions", $_data))
+				{
+					$this->instructions = array();
+
+					foreach ($_data["route_instructions"] as $i)
+						$this->instructions[] = new RouteInstruction($i);
+				}
+
+				if (array_key_exists("route_summary", $_data))
+					$this->summary = new RouteSummary($_data["route_summary"]);
+
+				if (array_key_exists("route_geometry", $_data))
+					$this->geometry = new Line($_data["route_geometry"]);
+
+				if (array_key_exists("version", $_data))
+					$this->version = $_data["version"];
+
+				if (array_key_exists("status_message", $_data))
+					$this->status_message = $_data["status_message"];
+			} catch (Exception $e)
+			{
+				throw new Exception("RouteNotFound");
+			}
+			
+			if (empty($_data))
+				throw new Exception("RouteNotFound");
+		}
+
+		/**
+		 *  Converts {@link Route} to string.
+		 *
+		 *  @return string Route's string value.
+		 */
+
+		function toString()
+		{
+			$s = "";
+
+			foreach ($this->instructions as $i)
+				$s .= $i->toString() . "  ;  ";
+
+			return $s;
+		}
+    };
+
+	/**
+	 *  @see RouteInstruction
+	 *  @package Cloudmade
+	 *
+	 *  Instructions on route passing.
+	 *
+	 *  @param string $instruction Text instruction
+	 *  @param float $length Length of the segment in meters
+	 *  @param int $position Index of the first point of the segment
+	 *  @param float $time Estimated time required to travel the segment in seconds
+	 *  @param string $length_caption Length of the segments in specified units
+	 *  @param string $earth_direction Earth direction
+	 *  @param string $azimuth North-based azimuth
+	 *  @param string $turn_type Code of the turn type
+	 *  @param float $turn_angle Angle in degress of the turn between two segments
+	 */
+
+	class RouteInstruction
+	{
+		var $instruction, $length, $position, $time, $length_caption, $earth_direction;
+		var $azimuth, $turn_type, $turn_angle;
+
+		/**
+		 *  Constructor. For internal use only.
+		 */
+
+		function RouteInstruction($_data)
+		{
+			if (is_null($_data) || !is_array($_data))
+				return null;
+
+			$this->instruction = $_data[0];
+			$this->length = floatval($_data[1]);
+			$this->position = intval($_data[2]);
+			$this->time = intval($_data[3]);
+			$this->length_caption = $_data[4];
+			$this->earth_direction = $_data[5];
+			$this->azimuth = floatval($_data[6]);
+
+			if (count($_data) == 9)
+			{
+				$this->turn_type = $_data[7];
+				$this->turn_angle = $_data[8];
+			}
+		}
+
+		/**
+		 *  "ToString" converter. Converts RouteInstruction object to string.
+		 *
+		 *  @return string RouteInstruction's string representation.
+		 */
+
+		function toString()
+		{
+		    return $this->instruction;
+		}
+	};
+
 ?>

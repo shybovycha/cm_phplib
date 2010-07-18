@@ -1,113 +1,177 @@
 <?php
 
-/**
- * Connection class to establish connection with Cloudmade's services server.
- * 
- * @package Connection
- * @author Artem Shybovych
- * 
- */
+	/**
+	 *  @copyright Cloudmade, 2010
+	 *  @license license.txt
+	 */
 
-/**
- * Copyright 2009 CloudMade.
- *
- * Licensed under the GNU Lesser General Public License, Version 3.0;
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.gnu.org/licenses/lgpl-3.0.txt
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+	/**
+	 *  Represents connection to Cloudmade's servers and handles queries and their results.
+	 *
+	 *  @package Cloudmade
+	 *  @see Connection
+	 */
 
-/**
- * Connection to CloudMade's services.
- * API Client object is initialized by user credentials
- * (apikey/private key) as well as target (i.e. cloudmade)
- * host, port, etc.
- * 
- * @param string $apikey API key used for connection
- * @param string $host Host of CloudMade's services
- * @param int $port HTTP port to be used for connection
- */
+    class Connection
+    {
+        var $base_url, $port, $api_key;
 
-class Connection {
-    var $apikey, $host, $port;
-    
-    /**
-     * Constructor
-	 * 
-	 * @param String $_apikey Your API key.
-	 * @see http://developers.cloudmade.com/
-	 * 
-	 * @param String $_host Host. Should be "cloudmade.com" if you wanna use Cloudmade services.
-	 * @param int $_port Port. As usual, it is 80.
-     */
-    
-    function Connection($_apikey, $_host = "cloudmade.com", $_port = 80) {
-        if (!isset($_apikey)) {
-            echo new Exception('API key is not specified');
-        } else {
-            $this->apikey = $_apikey;
-            $this->host = $_host;
+		/**
+		 *  Constructor; initializes connection.
+		 *
+		 *  @param string $_api_keys Your API key to connect to CloudMade services
+		 *  @param string $_base_url Should not start with 'www'
+		 *  @param int $_port Integer value of port for CloudMade portal, if nil then default 80 port is used
+		 */
+
+        function Connection($_api_key = null, $_base_url = 'cloudmade.com', $_port = null)
+		{
+            if ($_base_url != '')
+                $this->base_url = $_base_url; else
+                    $this->base_url = 'cloudmade.com';
+
+            $this->api_key = $_api_key;
             $this->port = $_port;
         }
-    }
 
-	/**
-	 * Call CloudMade's service and return raw data
-	 * 
-	 * @return String - response of the service to the request
-	 * 
-	 * @param string $uri: Tail part of full-blown request URL.
-	 * @tutorial '/api/action/thingy?get=True'
-     * @param string $subdomain Subdomain, from which request should be
-     * processed
-	 */
-    function call_service($uri, $subdomain = null) {
-        $domain = $this->host;
-        
-        if (isset($subdomain))
-            $domain = $subdomain . '.' . $this->host;
-        
-        if (isset($port))
-            $domain = $domain . ':' . $this->port;
+		/**
+		 *  Make a HTTP connection and send a request. Called by the cloudmade 'Client' object internally
+		 *
+		 *  @param string $server_url Url you want to use for request
+		 *  @param string $request Your request
+		 */
 
-		$uri = '/' . $this->apikey . $uri;
-		$uri = 'http://' . $domain . $uri;
-		
-		$request = new HttpRequest($uri, HttpRequest::METH_GET);
-		
-		try {
-            $request->send();
-            
-            return $request->getResponseBody();
-        } catch(Exception $e) {
-            echo $e;
-            
-            return null;
+        function connect($server_url, $request)
+        {
+            $result = null;
+
+			if (false)
+				var_dump($request);
+
+            $f = fopen($request, "r");
+
+            if ($f) // && $errno <= 0 && $errstr == null)
+            {
+                while (!feof($f))
+                    $result .= fread($f, 1);
+
+				fclose($f);
+            } else
+            {
+                die("Connection exception.");
+            }
+
+            return $result;
         }
-    }
 
-	/**
-	 * Connection object factory
-	 *
-     *  This function is subject to change. Currently it simply
-     * constructs a connection. It will be expanded to a more functional
-     * version later.
-     * 
-     * @param string $apikey API key used for connection
-     * @param string $host Host of CloudMade's services
-     * @param int $port HTTP port to be used for connection
-     * 
-     * @return Constructed connection object
-	 */
-    function get_connection($_apikey, $_host = "cloudmade.com", $_port = 80) {
-        return new Connection($_apikey, $_host, $_port);
-    }
-}
+		# Usage:
+		# $content = PostRequest("http://www.example.com/", $data);
+		# Not used yet.
+		/*function postRequest($_url, $_data)
+		{
+			$referer = "cloudmade.com";
+
+			// convert variables array to string:
+			$data = array();
+
+			while (list($n, $v) = each($_data))
+			{
+				$data[] = "$n=$v";
+			}
+
+			$data = implode('&', $data);
+
+			// parse the given URL
+			$_url = parse_url($_url);
+
+			if ($_url['scheme'] != 'http')
+			{
+				die('Only HTTP request are supported !');
+			}
+
+			// extract host and path:
+			$host = $_url['host'];
+			$path = $_url['path'];
+
+			// open a socket connection on port 80
+			$fp = fsockopen($host, 80);
+
+			// send the request headers:
+			fputs($fp, "POST $path HTTP/1.1\r\n");
+			fputs($fp, "Host: $host\r\n");
+			fputs($fp, "Referer: $referer\r\n");
+			fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
+			fputs($fp, "Content-length: ". strlen($data) ."\r\n");
+			fputs($fp, "Connection: close\r\n\r\n");
+			fputs($fp, $data);
+
+			$result = "";
+
+			while (!feof($fp))
+			{
+				// receive the results of the request
+				$result .= fgets($fp, 128);
+			}
+
+			// close the socket connection:
+			fclose($fp);
+
+			// split the result header from the content
+			$result = explode("\r\n\r\n", $result, 2);
+
+			//$header = isset($result[0]) ? $result[0] : '';
+			$content = isset($result[1]) ? $result[1] : '';
+
+			// return as array:
+			// return array($header, $content);
+			return $content;
+		}*/
+
+        /**
+		 *  Convenience method
+		 *
+		 *  @return string Return the base URL and port of this Connection
+		 */
+
+        function getUrl()
+        {
+			return $this->base_url . (($this->port != null) ? ':' . strval($this->port) : '');
+        }
+
+		/**
+		 *  Getter for $baseUrl
+		 *
+		 *  @return string Returns $baseUrl value
+		 */
+
+		function getBaseUrl()
+		{
+			return $this->base_url;
+		}
+
+		/**
+		 *  Getter for $apiKey
+		 *
+		 *  @return string Returns $apiKey value
+		 */
+
+		function getApiKey()
+		{
+			return $this->api_key;
+		}
+
+        /**
+		 *  Getter for $port
+		 *
+		 *  @return string Returns $port value
+		 */
+
+        function getPort()
+        {
+            if ($this->port == null)
+                return 80; else
+                    return $this->port;
+        }
+    };
+
 ?>

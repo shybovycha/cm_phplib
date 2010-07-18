@@ -1,0 +1,696 @@
+<html>
+<head>
+<title>Docs For Class TileService</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">Cloudmade</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+        
+                                    
+                              		  [ <a href="../classtrees_Cloudmade.html" class="menu">class tree: Cloudmade</a> ]
+		  [ <a href="../elementindex_Cloudmade.html" class="menu">index: Cloudmade</a> ]
+		  	    [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="todolist">
+			<p><a href="../todolist.html">Todo List</a></p>
+	</div>
+      <b>Packages:</b><br />
+              <a href="../li_Cloudmade.html">Cloudmade</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../Cloudmade/_Client.php.html">		Client.php
+		</a><br>
+			<a href="../Cloudmade/_Cloudmade.php.html">		Cloudmade.php
+		</a><br>
+			<a href="../Cloudmade/_Connection.php.html">		Connection.php
+		</a><br>
+			<a href="../Cloudmade/_Geocoding.php.html">		Geocoding.php
+		</a><br>
+			<a href="../Cloudmade/_Geometry.php.html">		Geometry.php
+		</a><br>
+			<a href="../Cloudmade/_Routing.php.html">		Routing.php
+		</a><br>
+			<a href="../Cloudmade/_Service.php.html">		Service.php
+		</a><br>
+			<a href="../Cloudmade/_StaticMap.php.html">		StaticMap.php
+		</a><br>
+			<a href="../Cloudmade/_Tile.php.html">		Tile.php
+		</a><br>
+			<a href="../Cloudmade/_VectorStream.php.html">		VectorStream.php
+		</a><br>
+	  </div><br />
+      
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../Cloudmade/BBox.html">BBox</a><br />
+	    		<a href="../Cloudmade/Client.html">Client</a><br />
+	    		<a href="../Cloudmade/Connection.html">Connection</a><br />
+	    		<a href="../Cloudmade/GeocodingService.html">GeocodingService</a><br />
+	    		<a href="../Cloudmade/Geometry.html">Geometry</a><br />
+	    		<a href="../Cloudmade/GeoResult.html">GeoResult</a><br />
+	    		<a href="../Cloudmade/GeoResultInfo.html">GeoResultInfo</a><br />
+	    		<a href="../Cloudmade/GeoResults.html">GeoResults</a><br />
+	    		<a href="../Cloudmade/Line.html">Line</a><br />
+	    		<a href="../Cloudmade/Location.html">Location</a><br />
+	    		<a href="../Cloudmade/Marker.html">Marker</a><br />
+	    		<a href="../Cloudmade/MultiLine.html">MultiLine</a><br />
+	    		<a href="../Cloudmade/MultiPolygon.html">MultiPolygon</a><br />
+	    		<a href="../Cloudmade/Path.html">Path</a><br />
+	    		<a href="../Cloudmade/Point.html">Point</a><br />
+	    		<a href="../Cloudmade/Polygon.html">Polygon</a><br />
+	    		<a href="../Cloudmade/Route.html">Route</a><br />
+	    		<a href="../Cloudmade/RouteInstruction.html">RouteInstruction</a><br />
+	    		<a href="../Cloudmade/RouteSummary.html">RouteSummary</a><br />
+	    		<a href="../Cloudmade/RoutingService.html">RoutingService</a><br />
+	    		<a href="../Cloudmade/Service.html">Service</a><br />
+	    		<a href="../Cloudmade/StaticMapsService.html">StaticMapsService</a><br />
+	    		<a href="../Cloudmade/TileService.html">TileService</a><br />
+	    		<a href="../Cloudmade/VectorStreamService.html">VectorStreamService</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: TileService</h1>
+Source Location: /Tile.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre><a href="../Cloudmade/Service.html">Service</a>
+   |
+   --TileService</pre><br />
+<div class="description"></div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+                    </ul>
+
+
+
+
+            
+
+        
+</td>
+
+<td valign="top">
+<h3><a href="#class_vars">Variables</a></h3>
+<ul>
+    <li><a href="../Cloudmade/TileService.html#var$default_style_id">$default_style_id</a></li>
+    <li><a href="../Cloudmade/TileService.html#var$default_tile_size">$default_tile_size</a></li>
+  </ul>
+</td>
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../Cloudmade/TileService.html#methodTileService">TileService</a></li>
+    <li><a href="../Cloudmade/TileService.html#methoddegrees">degrees</a></li>
+    <li><a href="../Cloudmade/TileService.html#methodgetTile">getTile</a></li>
+    <li><a href="../Cloudmade/TileService.html#methodgetTileXY">getTileXY</a></li>
+    <li><a href="../Cloudmade/TileService.html#methodlatlon2tilenums">latlon2tilenums</a></li>
+    <li><a href="../Cloudmade/TileService.html#methodradians">radians</a></li>
+    <li><a href="../Cloudmade/TileService.html#methodtilenums2latlon">tilenums2latlon</a></li>
+    <li><a href="../Cloudmade/TileService.html#methodxtile">xtile</a></li>
+    <li><a href="../Cloudmade/TileService.html#methodytile">ytile</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+
+
+<td valign="top">
+<h3>Inherited Variables</h3>
+<div class="tags">
+<h4>Class: <a href="../Cloudmade/Service.html">Service</a></h4>
+<dl>
+<dt>
+  <a href="../Cloudmade/Service.html#var$connection">Service::$connection</a>
+  </dt>
+<dd>
+   
+</dd>
+<dt>
+  <a href="../Cloudmade/Service.html#var$subdomain">Service::$subdomain</a>
+  </dt>
+<dd>
+   
+</dd>
+</dl>
+</div>
+</td>
+
+<td valign="top">
+<h3>Inherited Methods</h3>
+<div class="tags">
+<h4>Class: <a href="../Cloudmade/Service.html">Service</a></h4>
+<dl>
+    <dt>
+    <a href="../Cloudmade/Service.html#methodService">Service::Service()</a>
+  </dt>
+  <dd>
+    Constructor. Makes Service class abstract (ideologically).
+  </dd>
+    <dt>
+    <a href="../Cloudmade/Service.html#methodconnect">Service::connect()</a>
+  </dt>
+  <dd>
+    Service-special method, allowing connect to the server and get response to a given request.
+  </dd>
+    <dt>
+    <a href="../Cloudmade/Service.html#methodgetUrl">Service::getUrl()</a>
+  </dt>
+  <dd>
+    Getter.
+  </dd>
+    <dt>
+    <a href="../Cloudmade/Service.html#methodtoUrlParams">Service::toUrlParams()</a>
+  </dt>
+  <dd>
+    Converts given arguments to URL.
+  </dd>
+    <dt>
+    <a href="../Cloudmade/Service.html#methodurlTemplate">Service::urlTemplate()</a>
+  </dt>
+  <dd>
+    Forms the URL for request op. For internal use only.
+  </dd>
+  </dl>
+</div>
+</td>
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 20]<br />
+<br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>property:</b>&nbsp;&nbsp;</td><td>int $default_tile_size: Default tile size.</td>
+  </tr>
+  <tr>
+    <td><b>property:</b>&nbsp;&nbsp;</td><td>int $default_style_id: Default UI style ID.</td>
+  </tr>
+  <tr>
+    <td><b>see:</b>&nbsp;&nbsp;</td><td><a href="../Cloudmade/TileService.html">TileService</a></td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+<hr />
+<a name="class_vars"></a>
+<h3>Class Variables</h3>
+<div class="tags">
+	<a name="var$default_style_id"></a>
+	<p></p>
+	<h4>$default_style_id = <span class="value"></span></h4>
+	<p>[line 22]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+	<a name="var$default_tile_size"></a>
+	<p></p>
+	<h4>$default_tile_size = <span class="value"></span></h4>
+	<p>[line 22]</p>
+  
+  <br />
+	<div class="tags">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><b>Type:</b>&nbsp;&nbsp;</td>
+      <td>mixed</td>
+    </tr>
+      </table>
+	</div><br /><br />
+	<div class="top">[ <a href="#top">Top</a> ]</div><br />
+</div><br />
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+
+  <hr />
+	<a name="methodTileService"></a>
+	<h3>constructor TileService <span class="smalllinenumber">[line 33]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>TileService TileService(
+<a href="../Cloudmade/Client.html">Client</a>
+$_client, [array|null
+$_options = null], [string|null
+$_subdomain = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Constructor.<br /><br /><br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type"><a href="../Cloudmade/Client.html">Client</a>&nbsp;&nbsp;</td>
+        <td><b>$_client</b>&nbsp;&nbsp;</td>
+        <td>Existing <a href="../Cloudmade/Client.html">Client</a> object.</td>
+      </tr>
+          <tr>
+        <td class="type">string|null&nbsp;&nbsp;</td>
+        <td><b>$_subdomain</b>&nbsp;&nbsp;</td>
+        <td>Service's subdomain (used for versioning).</td>
+      </tr>
+          <tr>
+        <td class="type">array|null&nbsp;&nbsp;</td>
+        <td><b>$_options</b>&nbsp;&nbsp;</td>
+        <td>Optional arguments, merged into array. Possible items are: &quot;tile_size&quot; and &quot;style_id&quot;. They'll   change default values for $default_tile_size and $default_style_id accordingly.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methoddegrees"></a>
+	<h3>method degrees <span class="smalllinenumber">[line 98]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>float degrees(
+float
+$_radians)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Utility function. Converts radians to degrees.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Degree value.</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">float&nbsp;&nbsp;</td>
+        <td><b>$_radians</b>&nbsp;&nbsp;</td>
+        <td>Radian value.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetTile"></a>
+	<h3>method getTile <span class="smalllinenumber">[line 166]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string getTile(
+float
+$_lat, float
+$_lon, int|null
+$_zoom, [int|null
+$_style_id = null], [int|null
+$_tile_size = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get tile with given latitude, longitude and zoom.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Returns Raw PNG data which could be saved to file.</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">float&nbsp;&nbsp;</td>
+        <td><b>$_lat</b>&nbsp;&nbsp;</td>
+        <td>Latitude of requested tile</td>
+      </tr>
+          <tr>
+        <td class="type">float&nbsp;&nbsp;</td>
+        <td><b>$_lon</b>&nbsp;&nbsp;</td>
+        <td>Longitude of requested tile</td>
+      </tr>
+          <tr>
+        <td class="type">int|null&nbsp;&nbsp;</td>
+        <td><b>$_zoom</b>&nbsp;&nbsp;</td>
+        <td>Zoom level, on which tile is being requested</td>
+      </tr>
+          <tr>
+        <td class="type">int|null&nbsp;&nbsp;</td>
+        <td><b>$_style_id</b>&nbsp;&nbsp;</td>
+        <td>CloudMade's style id, if not given, default style is used (usually 1)</td>
+      </tr>
+          <tr>
+        <td class="type">int|null&nbsp;&nbsp;</td>
+        <td><b>$_tile_size</b>&nbsp;&nbsp;</td>
+        <td>size of tile, if not given the default 256 is used</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodgetTileXY"></a>
+	<h3>method getTileXY <span class="smalllinenumber">[line 147]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>string getTileXY(
+int
+$_xtile, int
+$_ytile, [int|null
+$_zoom = 1], [int|null
+$_style_id = null], [int|null
+$_tile_size = null])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Get tile with given x, y numbers and zoom<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Returns Raw PNG data which could be saved to file (tile's image content).</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_xtile</b>&nbsp;&nbsp;</td>
+        <td>X tile number</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_ytile</b>&nbsp;&nbsp;</td>
+        <td>Y tile number</td>
+      </tr>
+          <tr>
+        <td class="type">int|null&nbsp;&nbsp;</td>
+        <td><b>$_zoom</b>&nbsp;&nbsp;</td>
+        <td>Zoom level, on which tile is being requested</td>
+      </tr>
+          <tr>
+        <td class="type">int|null&nbsp;&nbsp;</td>
+        <td><b>$_style_id</b>&nbsp;&nbsp;</td>
+        <td>CloudMade's style id, if not given, default style is used (usually 1)</td>
+      </tr>
+          <tr>
+        <td class="type">int|null&nbsp;&nbsp;</td>
+        <td><b>$_tile_size</b>&nbsp;&nbsp;</td>
+        <td>size of tile, if not given the default 256 is used</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodlatlon2tilenums"></a>
+	<h3>method latlon2tilenums <span class="smalllinenumber">[line 51]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Cloudmade/Point.html">Point</a> latlon2tilenums(
+int
+$_lat, int
+$_lon, int
+$_zoom)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Convert latitude, longitude pair to tile coordinates.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Returns tile coordinates as a <a href="../Cloudmade/Point.html">Point</a> object.</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_lat</b>&nbsp;&nbsp;</td>
+        <td>Latitude.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_lon</b>&nbsp;&nbsp;</td>
+        <td>Longitude.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_zoom</b>&nbsp;&nbsp;</td>
+        <td>Zoom level.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodradians"></a>
+	<h3>method radians <span class="smalllinenumber">[line 86]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>float radians(
+float
+$_degrees)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Utility function. Transforms degree value to radian one.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Radian value.</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">float&nbsp;&nbsp;</td>
+        <td><b>$_degrees</b>&nbsp;&nbsp;</td>
+        <td>Degree value.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodtilenums2latlon"></a>
+	<h3>method tilenums2latlon <span class="smalllinenumber">[line 70]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code><a href="../Cloudmade/Point.html">Point</a> tilenums2latlon(
+int
+$_xtile, int
+$_ytile, itn
+$_zoom)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Convert tile coordinates pair to latitude, longitude.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Returns latitude and longitude as a <a href="../Cloudmade/Point.html">Point</a> object.</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_xtile</b>&nbsp;&nbsp;</td>
+        <td>X coordinate of the tile.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_ytile</b>&nbsp;&nbsp;</td>
+        <td>Y coordinate of the tile.</td>
+      </tr>
+          <tr>
+        <td class="type">itn&nbsp;&nbsp;</td>
+        <td><b>$_zoom</b>&nbsp;&nbsp;</td>
+        <td>Zoom level.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodxtile"></a>
+	<h3>method xtile <span class="smalllinenumber">[line 111]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int xtile(
+float
+$_lon, int
+$_zoom)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Utility funciton. Converts longitude and zoom values to X tile number.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>X tile number (ID).</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">float&nbsp;&nbsp;</td>
+        <td><b>$_lon</b>&nbsp;&nbsp;</td>
+        <td>Longitude.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_zoom</b>&nbsp;&nbsp;</td>
+        <td>Zoom level.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodytile"></a>
+	<h3>method ytile <span class="smalllinenumber">[line 127]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int ytile(
+float
+$_lat, int
+$_zoom)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Utility funciton. Converts latitude and zoom values to Y tile number.<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>Y tile number (ID).</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">float&nbsp;&nbsp;</td>
+        <td><b>$_lat</b>&nbsp;&nbsp;</td>
+        <td>Latitude.</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$_zoom</b>&nbsp;&nbsp;</td>
+        <td>Zoom level.</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Sat, 10 Jul 2010 16:33:47 +0300 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
