@@ -2,7 +2,7 @@
 	require "../lib/Cloudmade.php";
 
 	$client = new Client("BC9A493B41014CAABB98F0471D759707");
-
+	
 	# STATIC MAP TEST #1
 	$marker = new Marker(array("image" => "http://cloudmade.com/images/layout/cloudmade-logo.png", "position" => new Point(51.477225, 0.0)));
 	$path = array("point1" => new Point(51.477225, 0.0), "point2" => new Point(51.477225, 0.1), "point3" => new Point(51.477225, 0.2), "point4" => new Point(51.477225, 0.3));
@@ -13,7 +13,7 @@
 	fclose($f);
 
 	echo "<strong>StaticMapService test #1: </strong><br /><img src='bar.png' /><br />";
-
+	
 	# STATIC MAP TEST #2
 	$marker1 = new Marker(array("image" => "http://cloudmade.com/images/layout/cloudmade-logo.png", "position" => new Point(51.477225, 0.0)));
 	$marker2 = new Marker(array("image" => "http://cloudmade.com/images/layout/cloudmade-logo.png", "position" => new Point(51.477225, 0.001)));
@@ -25,7 +25,7 @@
 	fclose($f);
 
 	echo "<strong>StaticMapService test #2: </strong><br /><img src='bar2.png' /><br />";
-
+	
 	# STATIC MAP TEST #3
 	$marker = new Marker(array("image" => "http://cloudmade.com/images/layout/cloudmade-logo.png", "position" => new Point(51.477225, 0.0)));
 	$path = new Path(array("point1" => new Point(51.477225, 0.0), "point2" => new Point(52.77225, 0.1)));
@@ -35,6 +35,5 @@
 		fwrite($f, $map);
 	fclose($f);
 
-	echo "<strong>StaticMapService test #3: </strong><br /><img src='bar3.png' /><br />";
-	echo "\r\n";
+	echo "<strong>StaticMapService test #3: </strong><br /><img src='bar3.png' /><br />\n";
 ?>
