@@ -1,15 +1,16 @@
 <?php
 
 	/**
+	 *  @package Cloudmade
 	 *  @copyright Cloudmade, 2010
-	 *  @license license.txt
+	 *  @license LICENSE
 	 */
 
 	/**
 	 *  Represents connection to Cloudmade's servers and handles queries and their results.
 	 *
-	 *  @package Cloudmade
 	 *  @see Connection
+	 *  @package Cloudmade
 	 */
 
     class Connection

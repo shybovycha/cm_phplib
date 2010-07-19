@@ -1,9 +1,9 @@
 <?php
 
 	/**
+	 * @package Cloudmade
 	 *  @copyright Cloudmade, 2010
-	 *  @license license.txt
-	 *  @package Cloudmade
+	 *  @license LICENSE
 	 */
 
 	require_once "Connection.php";
